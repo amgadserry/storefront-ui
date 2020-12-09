@@ -216,4 +216,72 @@ storiesOf("Organisms|Accordion", module)
         </SfList>
       </SfAccordionItem>
       </SfAccordion>`,
+  }))
+  .add("[slot] header with nested accordions", () => ({
+    components: { SfAccordion, SfList, SfMenuItem },
+    props: {
+      open: {
+        default: text("open", "Clothing", "Props"),
+      },
+      multiple: {
+        default: boolean("multiple", false, "Props"),
+      },
+      showChevron: {
+        default: boolean("showChevron", false, "Props"),
+      },
+      transition: {
+        default: text("transition", "sf-expand", "Props"),
+      },
+    },
+    data() {
+      return {
+        accordions: [
+          {
+            header: "Clothing",
+            items: [
+              { label: "All", count: "280", items: ["Short", "Tall"] },
+              { label: "Skirts", count: "11", items: ["Short", "Tall"] },
+              { label: "Dresses", count: "32", items: ["Short", "Tall"] },
+            ],
+          },
+          {
+            header: "Accessories",
+            items: [
+              { label: "All", count: "80", items: ["Short", "Tall"] },
+              { label: "Belts", count: "101", items: ["Short", "Tall"] },
+              { label: "Bag", count: "2", items: ["Short", "Tall"] },
+            ],
+          },
+          {
+            header: "Shoes",
+            items: [
+              { label: "All", count: "2", items: ["Short", "Tall"] },
+              { label: "Trainers", count: "22", items: ["Short", "Tall"] },
+              { label: "Sandals", count: "55", items: ["Short", "Tall"] },
+            ],
+          },
+        ],
+      };
+    },
+    template: `<SfAccordion
+        :open="open"
+        :multiple="multiple"
+        :show-chevron="showChevron"
+        :transition="transition"
+        :style="{maxWidth: '186px', padding: '1rem'}">
+      <SfAccordionItem
+        v-for="accordion in accordions"
+        :key="accordion.header"
+        :header="accordion.header"
+        :has-dynamic-height-content="true">
+        <template #header="{header, isOpen, accordionClick, showChevron}">
+          <div @click="accordionClick" :style="{cursor: 'pointer'}">{{ header }}</div>
+        </template>
+        <SfAccordion show-chevron open-first>
+          <SfAccordionItem v-for="item in accordion.items" :key="item.label" :header="item.label">
+            <div v-for="item in item.items">{{ item }}</div>
+          </SfAccordionItem>
+        </SfAccordion/>
+      </SfAccordionItem>
+    </SfAccordion>`,
   }));

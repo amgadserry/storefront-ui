@@ -27,7 +27,10 @@
         />
       </SfButton>
     </slot>
-    <SfExpand :transition="$parent.transition">
+    <SfExpand
+      :transition="$parent.transition"
+      :has-dynamic-height-content="hasDynamicHeightContent"
+    >
       <div v-if="isOpen">
         <div class="sf-accordion-item__content">
           <!-- @slot -->
@@ -54,6 +57,10 @@ export default {
     header: {
       type: String,
       default: "",
+    },
+    hasDynamicHeightContent: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
