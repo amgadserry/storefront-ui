@@ -17,7 +17,8 @@
     "storybook:build": "yarn create-index-files && vue-cli-service storybook:build -s ./public -c config/storybook",
     "storybook:serve": "yarn create-index-files && vue-cli-service storybook:serve -s ./public -p 6006 -c config/storybook",
     "test:dev": "vue-cli-service test:unit --watch",
-    "version": "node scripts/version.js"
+    "version": "node scripts/version.js",
+    "prepare": "npm run build"
   },
   "main": "./index.js",
   "module": "./index.js",
